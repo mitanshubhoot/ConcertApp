@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8F9FB"
+    tools:context=".MainActivity">
+
+
+    <ImageView
+        android:id="@+id/bgone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bgapp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bgoverlay"
+        tools:layout_editor_absoluteX="37dp"
+        tools:layout_editor_absoluteY="-165dp" />
+
+    <TextView
+        android:id="@+id/textViewtop"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="40dp"
+        android:text="Private Music Organisation"
+        android:lineSpacingExtra="6dp"
+        android:textColor="#FFF"
+        android:textSize="42sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/bgone"
+        android:layout_marginLeft="48dp" />
+
+    <TextView
+        android:id="@+id/textViewdown"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="44dp"
+        android:lineSpacingExtra="8dp"
+        android:text="Log into the app to participate and attend events"
+        android:textColor="#FFF"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewtop"
+        android:layout_marginLeft="48dp" />
+
+
+
+    <Button
+        android:id="@+id/btnget"
+        android:layout_width="168dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="52dp"
+        android:background="@drawable/bgbtn3"
+        android:text="Get Started"
+        android:textAllCaps="false"
+        android:textColor="#FFF"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewdown"
+        android:layout_marginLeft="48dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+
