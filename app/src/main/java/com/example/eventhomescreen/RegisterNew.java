@@ -16,7 +16,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
-
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -70,14 +70,15 @@ public class RegisterNew extends AppCompatActivity {
                 public void onClick(View v) {
                     //do something;
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
-                    DatabaseReference myRef = database.getReference().child("Users").child(Global.registration_no).child("Concerts").child(concertNo);
+                    String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+                    DatabaseReference myRef = database.getReference().child("Users").child(email.substring(0,email.length()-10)).child("Concerts").child(concertNo);
 
                     myRef.child("Time").setValue(concertTime);
                     myRef.child("Date").setValue(concertDate);
                     myRef.child("Location").setValue(concertLocation);
                     myRef.child("Category").setValue(concertCategory);
                     myRef.child("Title").setValue(concertTitle);
-                    myRef = database.getReference().child("Concerts").child("Registrations").child(concertTitle).child(Global.registration_no);
+                    myRef = database.getReference().child("Concerts").child("Registrations").child(concertTitle).child(email.substring(0,email.length()-10));
                     myRef.child("Name").setValue(Name.getText().toString());
                     myRef.child("Contact").setValue(Contact.getText().toString());
                     myRef.child("Email").setValue(Email.getText().toString());
