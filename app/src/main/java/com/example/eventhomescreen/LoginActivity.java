@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -18,6 +19,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.eventhomescreen.Model.User;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,12 +36,24 @@ public class LoginActivity extends AppCompatActivity {
 
     FirebaseDatabase database;
     DatabaseReference users;
+    private FirebaseAuth mAuth;
 
+
+    /*@Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        Toast.makeText(LoginActivity.this, "Logged In", Toast.LENGTH_SHORT).show();
+        Intent s = new Intent(getApplicationContext(), HomeScreen.class);
+        startActivity(s);
+    }*/
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mAuth = FirebaseAuth.getInstance();
         setContentView(R.layout.activity_login);
 
 
@@ -55,6 +73,29 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    private void signIn(String email, String password){
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d("TAG", "");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            Toast.makeText(LoginActivity.this, "Logged In", Toast.LENGTH_SHORT).show();
+                            Intent s = new Intent(getApplicationContext(), HomeScreen.class);
+                            startActivity(s);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w("TAG", "signInWithEmail:failure", task.getException());
+                            Toast.makeText(getApplicationContext(), "Authentication failed.",Toast.LENGTH_SHORT).show();
+                        }
+
+                        // ...
+                    }
+                });
+    }
+/*
     private void signIn(final String username, final String password) {
         users.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -85,5 +126,5 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
-    }
+    }*/
 }
